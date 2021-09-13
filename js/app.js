@@ -1,3 +1,4 @@
+// Load Products functions 
 const loadProducts = () => {
   const url = `https://fakestoreapi.com/products`;
   fetch(url)
@@ -10,34 +11,44 @@ loadProducts();
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
-    console.log(product)
     const image = product.image;
     const div = document.createElement("div");
-    div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
-      <div>
-    <img class="product-image" src=${image}></img>
+    div.classList.add("col");
+    div.innerHTML = `
+      <div style="background-color:#f9f9f9" class="card h-100 text-center single-product">
+        <img src="${image}" class="product-image" alt="images">
+        <div class="card-body">
+          <h3 class="card-title">${product.title}</h3>
+          <p>Category: ${product.category}</p>
+          <p>Rating Avg : 
+          <i class="fas fa-star rating-color"></i>
+          <i class="fas fa-star rating-color"></i>
+          <i class="fas fa-star rating-color"></i>
+          <i class="fas fa-star-half-alt rating-color"></i>
+          <i class="far fa-star rating-color"></i> <strong>${product.rating.rate} </strong></p>
+          <p>(Total-Review :<strong> ${product.rating.count})</strong></p>
+          <h2>Price: $ ${product.price}</h2>
+          <div class="mt-4">
+            <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="btn btn-success">add to cart</button>
+            <button id="details-btn" class="btn btn-danger">Details</button></div>
+          </div>
+        </div>
       </div>
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <p>Ratings : ${product.rating.rate} / Total-Rating: ${product.rating.count}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
-      `;
+    `;
     document.getElementById("all-products").appendChild(div);
   }
 };
+// Update My-Cart 
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
   updatePrice("price", price);
-  getInputValue("delivery-charge"); // total change modified..
+  getInputValue("delivery-charge");
   updateTaxAndCharge();
   document.getElementById("total-Products").innerText = count;
-  updateTotal(); // total change 
+  updateTotal();
 };
-
+// update input value
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
@@ -73,7 +84,6 @@ const updateTaxAndCharge = () => {
     setInnerText("total-tax", priceConverted * 0.4);
   }
 };
-
 //grandTotal update function
 const updateTotal = () => {
   const grandTotal =
