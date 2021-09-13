@@ -13,8 +13,7 @@ body {
   border: none;
 }
 .search-box {
-  border: 1px solid rgb(3, 118, 211);
-  width: 281px;
+  width: 35%;
   border-radius: 5px;
   margin: auto;
   margin-top: 50px;
