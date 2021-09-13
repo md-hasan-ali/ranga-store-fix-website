@@ -28,11 +28,12 @@ const showProducts = (products) => {
           <i class="far fa-star rating-color"></i> <strong>${product.rating.rate} </strong></p>
           <p>(Total-Review :<strong> ${product.rating.count})</strong></p>
           <h2>Price: $ ${product.price}</h2>
-          <div class="mt-4">
-            <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="btn btn-success">add to cart</button>
-            <button id="details-btn" class="btn btn-danger">Details</button></div>
-          </div>
         </div>
+        <div class="pb-3">
+          <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="btn btn-success">add to cart</button>
+          <button id="details-btn" class="btn btn-danger">Details</button>
+        </div>
+      </div>
       </div>
     `;
     document.getElementById("all-products").appendChild(div);
